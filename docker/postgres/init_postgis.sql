@@ -1,3 +1,5 @@
 \c dgeo_sail
 CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS postgis_topology;
+CREATE DATABASE testing;
+
