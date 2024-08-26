@@ -1,0 +1,46 @@
+image: laravelsail/php83-composer:latest
+
+services:
+  - postgresql:13
+
+variables:
+  MYSQL_ROOT_PASSWORD: root
+  MYSQL_DATABASE: dgeo_sail
+  MYSQL_USER: sail
+  MYSQL_PASSWORD: password
+  DB_HOST: postgresql  # Este es el nombre del servicio
+
+stages:
+  - install
+  - test
+  - deploy
+
+# Install dependencies
+install_dependencies:
+  stage: install
+  script:
+    - cp .env.example .env
+    - composer install --prefer-dist --no-interaction --no-progress --no-scripts --ignore-platform-reqs
+    - php artisan key:generate
+  cache:
+    key: composer
+    paths:
+      - vendor/
+
+# Run tests
+run_tests:
+  stage: test
+  script:
+    - php artisan migrate --no-interaction --force
+    - php artisan test
+  dependencies:
+    - install_dependencies
+
+# Deploy (opcional)
+deploy:
+  stage: deploy
+  script:
+    - echo "Desplegando la aplicación..."
+  only:
+    - master
+
