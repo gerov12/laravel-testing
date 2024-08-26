@@ -13,8 +13,9 @@ composer install --ignore-platform-reqs
 https://laravel.com/docs/11.x/sail#installing-composer-dependencies-for-existing-projects
 
 ## Configurar ambiente
-- Crear un archivo *.env* a partir de *.env.example* (descomentando la configuración de la Base de Datos de Postgres).    
-	Los puertos **APP_PORT** y **FORWARD_BD_PORT** pueden modificarse a gusto.
+- Crear un archivo *.env* a partir de *.env.example*:  
+    (`cp .env.example .env`)  
+	*Los puertos **APP_PORT** y **FORWARD_BD_PORT** pueden modificarse a gusto.*  
 - Generar la **APP_KEY** con el siguiente comando:  
 	`./vendor/bin/sail artisan key:generate`
 
