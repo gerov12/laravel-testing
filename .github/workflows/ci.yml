@@ -9,6 +9,15 @@ on:
       - master
 
 jobs:
+  cancel-workflow:
+    runs-on: ubuntu-20.04
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    steps:
+      - name: Cancel previous redundant workflows
+        uses: styfle/cancel-workflow-action@0.4.0
+        with:
+          access_token: ${{ github.token }}
+
   build:
     runs-on: ubuntu-20.04
 
